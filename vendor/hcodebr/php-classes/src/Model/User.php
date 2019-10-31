@@ -170,15 +170,14 @@ class User extends Model {
 
 				$link = "https://www.lonelydes-com.umbler.net/admin/forgot/reset?code=$code";
 
-				echo $link;
 
-				// $mailer = new Mailer($data["desemail"], $data["desperson"],  "Redefinir senha da Hcode Store", "forgot", array(
-				// 	"name"=>$data["desperson"],
-				// 	"link"=>$link
-				// ));
-				// $mailer->send();
+				$mailer = new Mailer($data["desemail"], $data["desperson"],  "Redefinir senha da Hcode Store", "forgot", array(
+					"name"=>$data["desperson"],
+					"link"=>$link
+				));
+				$mailer->send();
 
-				// return $data;
+				return $data;
 			}
 
 		}

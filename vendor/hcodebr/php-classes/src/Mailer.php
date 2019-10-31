@@ -10,6 +10,8 @@ class Mailer
     const USERNAME = "hydena788@gmail.com";
     const PASSWORD = "#Ln13131301!???";
     const NAME_FROM = "Hcode Store";
+    const HOST = "smtp.gmail.com";
+    const PORT = 587;
 
     private $mail;
 
@@ -44,13 +46,13 @@ class Mailer
     $this->mail->SMTPDebug = SMTP::DEBUG_OFF;
 
     //Set the hostname of the mail server
-    $this->mail->Host = 'smtp.gmail.com';
+    $this->mail->Host = Mailer::HOST;
     // use
     // $this->mail->Host = gethostbyname('smtp.gmail.com');
     // if your network does not support SMTP over IPv6
 
     //Set the SMTP port number - 587 for authenticated TLS, a.k.a. RFC4409 SMTP submission
-    $this->mail->Port = 587;
+    $this->mail->Port = Mailer::PORT;
 
     //Set the encryption mechanism to use - STARTTLS or SMTPS
     $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
