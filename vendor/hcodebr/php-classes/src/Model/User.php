@@ -168,7 +168,7 @@ class User extends Model {
 
 				$code = base64_encode($code);
 
-				$link = "https://www.lonelydes-com.umbler.net/admin/forgot/reset?code=$code";
+				$link = "https://lonelydes-com.umbler.net/admin/forgot/reset?code=$code";
 
 				echo $link;
 				// $mailer = new Mailer($data["desemail"], $data["desperson"],  "Redefinir senha da Hcode Store", "forgot", array(
