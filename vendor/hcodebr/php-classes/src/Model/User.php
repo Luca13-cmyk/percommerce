@@ -183,6 +183,41 @@ class User extends Model {
 		}
 
 	}
+	public static function validForgotDecrypt($code)
+	{
+		$code = base64_decode($code);
+
+		$idrecovery = openssl_decrypt($code, 'AES-128-CBC', pack("a16", User::SECRET), 0, pack("a16", User::SECRET_IV));
+
+		$sql = new Sql();
+
+		$results = $sql->select("
+		
+		SELECT *
+		FROM tb_userspasswordsrecoveries a
+		INNER JOIN tb_users b USING(iduser)
+		INNER JOIN tb_persons c USING(idperson)
+		WHERE
+			a.idrecovery = :idrecovery
+			AND
+			a.dtrecovery IS NULL
+			AND
+			DATE_ADD(a.dtregister, INTERVAL 1 HOUR) >= NOW();
+		
+		", array(
+			":idrecovery"=>$idrecovery
+		));
+
+		if (count($results) === 0)
+		{
+			throw new \Exception("Nao foi possivel recuperar a senha");
+			
+		}
+		else 
+		{
+			return $results[0];
+		}
+	}
 }
 
 
