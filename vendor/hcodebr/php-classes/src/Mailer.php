@@ -3,7 +3,7 @@
 namespace Hcode;
 
 use Rain\Tpl;
-
+use PHPMailer\PHPMailer\PHPMailer;
 class Mailer
 
 {
@@ -34,7 +34,7 @@ class Mailer
     $html = $tpl->draw($tplName, true); // o true serve para jogar para variavel $html, evitando desenhar na tela
     
     //Create a new PHPMailer instance
-    $this->mail = new \PHPMailer;
+    $this->mail = new PHPMailer;
 
     //Tell PHPMailer to use SMTP
     $this->mail->isSMTP();
