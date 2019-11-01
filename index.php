@@ -182,19 +182,19 @@ $app->get("/admin/forgot/reset", function(){
 });
 $app->post("/admin/forgot/reset", function()
 {
-	$forgot = User::validForgotDecrypt($_POST["code"]);
+	// $forgot = User::validForgotDecrypt($_POST["code"]);
 
-	User::setForgotUsed($forgot["idrecovery"]);
+	// User::setForgotUsed($forgot["idrecovery"]);
 
-	$user = new User();
+	// $user = new User();
 
-	$user->get((int)$forgot["iduser"]);
+	// $user->get((int)$forgot["iduser"]);
 
-	$password = password_hash($_POST["password"], PASSWORD_DEFAULT, [
-    'cost'=>12, //numero de processamento que o servidor fara para encryptar a senha. Quanto maior for, mais segura sera.
-	]);
+	// $password = password_hash($_POST["password"], PASSWORD_DEFAULT, [
+    // 'cost'=>12, //numero de processamento que o servidor fara para encryptar a senha. Quanto maior for, mais segura sera.
+	// ]);
 
-	echo $password;
+	echo "csacasc";
 	// $user->setPassword($password);
 
 	// $page = new PageAdmin([
