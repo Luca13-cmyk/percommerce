@@ -184,7 +184,7 @@ $app->post("/admin/forgot/reset", function()
 {
 	$forgot = User::validForgotDecrypt($_POST["code"]);
 
-	User::setForgotUsed($forgot["idrecovery"]);
+	User::setForgotUser($forgot["idrecovery"]);
 
 	// $user = new User();
 
@@ -194,7 +194,7 @@ $app->post("/admin/forgot/reset", function()
     // 'cost'=>12, //numero de processamento que o servidor fara para encryptar a senha. Quanto maior for, mais segura sera.
 	// ]);
 
-	echo "csacasc2";
+	echo "csacasc3";
 	// $user->setPassword($password);
 
 	// $page = new PageAdmin([
