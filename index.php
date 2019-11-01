@@ -113,7 +113,7 @@ $app->post('/admin/users/create', function() {
  	]);
 	
 	$user->setData($_POST);
-	
+
 	$user->save();
 
 	header("Location: /admin/users");
@@ -194,13 +194,14 @@ $app->post("/admin/forgot/reset", function()
     'cost'=>12, //numero de processamento que o servidor fara para encryptar a senha. Quanto maior for, mais segura sera.
 	]);
 
-	$user->setPassword($password);
+	echo $password;
+	// $user->setPassword($password);
 
-	$page = new PageAdmin([
-		"header"=>false,
-		"footer"=>false
-	]);
-	$page->setTpl("forgot-reset-success");
+	// $page = new PageAdmin([
+	// 	"header"=>false,
+	// 	"footer"=>false
+	// ]);
+	// $page->setTpl("forgot-reset-success");
 
 
 
