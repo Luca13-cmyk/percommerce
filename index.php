@@ -152,7 +152,7 @@ $app->post("/admin/forgot", function()
 {
 	
 	$user = User::getForgot($_POST["email"]);
-	// header("Location: /admin/forgot/sent");
+	header("Location: /admin/forgot/sent");
 	exit;
 });
 
