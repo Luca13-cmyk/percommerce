@@ -15,7 +15,19 @@ class Category extends Model
 		$sql = new Sql();
 
 		return  $sql->select("SELECT * FROM tb_categories ORDER BY descategory");
-	}
+    }
+    
+    public function save()
+    {
+        $sql = new Sql();
+		
+		$results = $sql->select("CALL sp_categories_save(:idcategory, :descategory)", array(
+			":idcategory"=>$this->getidcategory(),
+			":descategory"=>$this->getcategory()
+		));
+
+		$this->setData($results[0]);
+    }
 
 	
 	
