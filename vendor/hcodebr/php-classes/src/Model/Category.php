@@ -33,7 +33,7 @@ class Category extends Model
 	{
 		$sql = new Sql();
 
-		$sql->select("SELECT * FROM tb_categories WHERE idcategory = :idcategory", [
+		$results = $sql->select("SELECT * FROM tb_categories WHERE idcategory = :idcategory", [
 			":idcategory"=>$idcategory
 		]);
 		$this->setData($results[0]);
