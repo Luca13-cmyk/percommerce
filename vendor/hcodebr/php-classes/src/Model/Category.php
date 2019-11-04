@@ -27,7 +27,28 @@ class Category extends Model
 		));
 
 		$this->setData($results[0]);
-    }
+	}
+	
+	public function get($idcategory)
+	{
+		$sql = new Sql();
+
+		$sql->select("SELECT * FROM tb_categories WHERE idcategory = :idcategory", [
+			":idcategory"=>$idcategory
+		]);
+		$this->setData($results[0]);
+
+
+	}
+
+	public function delete()
+	{
+		$sql = new Sql();
+
+		$sql->query("DELETE FROM tb_categories WHERE idcategory = :idcategory", [
+			":idcategory"=>$this->getidcategory()
+		]);
+	}
 
 	
 	
