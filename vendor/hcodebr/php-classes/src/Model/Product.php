@@ -89,7 +89,6 @@ class Product extends Model
 			case 'jpg':
 			case 'jpeg':
 				$image = imagecreatefromjpeg($file["tmp_name"]);
-				
 				break;
 			case 'gif':
 				$image = imagecreatefromgif($file["tmp_name"]);
