@@ -80,38 +80,68 @@ class Product extends Model
 		return $values;
 	}
 
-	public function setPhoto($file)
-	{
-		$extension = explode('.', $file["name"]);
-		$extension = end($extension); // vai pegar as extensoes : .jpg .png etc
+	// public function setPhoto($file)
+	// {
+	// 	$extension = explode('.', $file["name"]);
+	// 	$extension = end($extension); // vai pegar as extensoes : .jpg .png etc
 
-		switch ($extension) {
-			case 'jpg':
-			case 'jpeg':
-				$image = imagecreatefromjpeg($file["tmp_name"]);
-				break;
-			case 'gif':
-				$image = imagecreatefromgif($file["tmp_name"]);
+	// 	switch ($extension) {
+	// 		case 'jpg':
+	// 		case 'jpeg':
+	// 			$image = imagecreatefromjpeg($file["tmp_name"]);
+	// 			break;
+	// 		case 'gif':
+	// 			$image = imagecreatefromgif($file["tmp_name"]);
 				
-				break;
-			case 'png':
-				$image = imagecreatefrompng($file["tmp_name"]);
+	// 			break;
+	// 		case 'png':
+	// 			$image = imagecreatefrompng($file["tmp_name"]);
 				
-				break;
-		}
+	// 			break;
+	// 	}
 
 		
-		$dist = $_SERVER["DOCUMENT_ROOT"] . DIRECTORY_SEPARATOR . "res" . DIRECTORY_SEPARATOR . "site" . DIRECTORY_SEPARATOR . 
-		"img" . DIRECTORY_SEPARATOR . "products" . DIRECTORY_SEPARATOR . $this->getidproduct() . ".jpg";
+	// 	$dist = $_SERVER["DOCUMENT_ROOT"] . DIRECTORY_SEPARATOR . "res" . DIRECTORY_SEPARATOR . "site" . DIRECTORY_SEPARATOR . 
+	// 	"img" . DIRECTORY_SEPARATOR . "products" . DIRECTORY_SEPARATOR . $this->getidproduct() . ".jpg";
 
-		imagejpeg($image, $dist);
+	// 	imagejpeg($image, $dist);
 
-		imagedestroy($image);
+	// 	imagedestroy($image);
 
+	// 	$this->checkPhoto();
+	// }
+	public function setPhoto($file)
+	{ 
+	if(empty( $file['name'])){
 		$this->checkPhoto();
+	}else{
+		$extension = explode('.', $file['name']);
+		$extension = end($extension);
+		switch ($extension) {
+		case "jpg":
+		case "jpeg":
+		$image = imagecreatefromjpeg($file["tmp_name"]);
+		break;
+		case "gif":
+		$image = imagecreatefromgif($file["tmp_name"]);
+		break;
+		case "png":
+		$image = imagecreatefrompng($file["tmp_name"]);
+		break;
+		}
+		$dist = $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 
+		"res" . DIRECTORY_SEPARATOR . 
+		"site" . DIRECTORY_SEPARATOR . 
+		"img" . DIRECTORY_SEPARATOR . 
+		"products" . DIRECTORY_SEPARATOR . 
+		$this->getidproduct() . ".jpg";
+		imagejpeg($image, $dist);
+		imagedestroy($image);
+		$this->checkPhoto();
+		}
 	}
 	
-}
+	}
 
 
 ?>
