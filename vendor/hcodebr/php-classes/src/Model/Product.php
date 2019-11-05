@@ -137,6 +137,7 @@ class Product extends Model
 		$this->getidproduct() . ".jpg";
 		imagejpeg($image, $dist);
 		imagedestroy($image);
+		exit;
 		$this->checkPhoto();
 		}
 	}
