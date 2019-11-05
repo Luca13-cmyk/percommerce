@@ -85,20 +85,20 @@ class Product extends Model
 	// 	$extension = explode('.', $file["name"]);
 	// 	$extension = end($extension); // vai pegar as extensoes : .jpg .png etc
 
-	// 	switch ($extension) {
-	// 		case 'jpg':
-	// 		case 'jpeg':
-	// 			$image = imagecreatefromjpeg($file["tmp_name"]);
-	// 			break;
-	// 		case 'gif':
-	// 			$image = imagecreatefromgif($file["tmp_name"]);
+		// switch ($extension) {
+		// 	case 'jpg':
+		// 	case 'jpeg':
+		// 		$image = imagecreatefromjpeg($file["tmp_name"]);
+		// 		break;
+		// 	case 'gif':
+		// 		$image = imagecreatefromgif($file["tmp_name"]);
 				
-	// 			break;
-	// 		case 'png':
-	// 			$image = imagecreatefrompng($file["tmp_name"]);
+		// 		break;
+		// 	case 'png':
+		// 		$image = imagecreatefrompng($file["tmp_name"]);
 				
-	// 			break;
-	// 	}
+		// 		break;
+		// }
 
 		
 	// 	$dist = $_SERVER["DOCUMENT_ROOT"] . DIRECTORY_SEPARATOR . "res" . DIRECTORY_SEPARATOR . "site" . DIRECTORY_SEPARATOR . 
