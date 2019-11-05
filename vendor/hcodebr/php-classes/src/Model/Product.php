@@ -36,7 +36,7 @@ class Product extends Model
 
 	}
 	
-	public function get($idcategory)
+	public function get($idproduct)
 	{
 		$sql = new Sql();
 
