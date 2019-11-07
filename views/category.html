@@ -40,8 +40,8 @@
                         <nav>
                             <ul class="pagination">
                             {loop="$pages"}
-                            {if="$_SERVER['HTTP_REFERER'] === $value.link"}
-                            <li><a class='active' href="{$value.link}">{$value.page}</a></li>
+                            {if="substr(strstr($_SERVER['HTTP_REFERER'], "/"), 0) === $value.link"}
+                            <li><a data-teste='{$dir}' class='active' href="{$value.link}">{$value.page}</a></li>
                             {else}
                             <li><a class='vazio' href="{$value.link}">{$value.page}</a></li>
                             {/if}

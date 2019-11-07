@@ -38,7 +38,8 @@ $app->get("/categories/:idcategory", function($idcategory){
 	$page->setTpl("category", [
 		"category"=>$category->getvalues(),
         "products"=>$pagination["data"],
-        'pages'=>$pages
+        'pages'=>$pages,
+        'dir'=>substr(strstr($_SERVER["HTTP_REFERER"], "/"), 0)
         
 	]);
 
