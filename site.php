@@ -39,7 +39,7 @@ $app->get("/categories/:idcategory", function($idcategory){
 		"category"=>$category->getvalues(),
         "products"=>$pagination["data"],
         'pages'=>$pages,
-        'dir'=>substr(strstr($_SERVER['QUERY_STRING'], "="), 1)
+        'dir'=>(int)substr(strstr($_SERVER['QUERY_STRING'], "="), 1)
         
 	]);
 
