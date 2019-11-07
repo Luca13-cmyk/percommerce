@@ -35,7 +35,7 @@ $app->get("/categories/:idcategory", function($idcategory){
             'page'=>$i
         ]);
     }
-    $dir = ($_SERVER['QUERY_STRING'] > 0) ? (int)substr(strstr($_SERVER['QUERY_STRING'], "="), 1) : 1;
+    $dir = ($_SERVER['QUERY_STRING']) ? (int)substr(strstr($_SERVER['QUERY_STRING'], "="), 1) : 1;
     
 	$page->setTpl("category", [
 		"category"=>$category->getvalues(),
