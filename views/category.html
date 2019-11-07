@@ -40,7 +40,8 @@
                         <nav>
                             <ul class="pagination">
                             {loop="$pages"}
-                            {if="$dir === $value.link"}
+                            
+                            {if="$dir === $value.page"}
                             <li><a data-teste='{$dir}' class='active' href="{$value.link}">{$value.page}</a></li>
                             {else}
                             <li><a data-teste='{$dir}' class='vazio' href="{$value.link}">{$value.page}</a></li>
