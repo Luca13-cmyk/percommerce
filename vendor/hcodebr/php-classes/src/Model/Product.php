@@ -110,6 +110,7 @@ class Product extends Model
 
 	// 	$this->checkPhoto();
 	// }
+	
 	public function setPhoto($file)
 	{ 
 	if(empty( $file['name'])){
