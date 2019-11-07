@@ -43,7 +43,7 @@
                             {if="$dir === $value.link"}
                             <li><a data-teste='{$dir}' class='active' href="{$value.link}">{$value.page}</a></li>
                             {else}
-                            <li><a class='vazio' href="{$value.link}">{$value.page}</a></li>
+                            <li><a data-teste='{$dir}' class='vazio' href="{$value.link}">{$value.page}</a></li>
                             {/if}
                             {/loop}
                             </ul>
