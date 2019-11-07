@@ -35,11 +35,13 @@ $app->get("/categories/:idcategory", function($idcategory){
             'page'=>$i
         ]);
     }
+    $dir = (isset($_SERVER['QUERY_STRING'])) ? (int)substr(strstr($_SERVER['QUERY_STRING'], "="), 1) : 1;
+    
 	$page->setTpl("category", [
 		"category"=>$category->getvalues(),
         "products"=>$pagination["data"],
         'pages'=>$pages,
-        'dir'=>(int)substr(strstr($_SERVER['QUERY_STRING'], "="), 1)
+        'dir'=>$dir
         
 	]);
 
