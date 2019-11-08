@@ -170,10 +170,9 @@ class Product extends Model
 	public function getCategories()
 	{
 		$sql = new Sql();
-		$rows = $sql->select("SELECT * FROM tb_categories a INNER JOIN  tb_productscategories b ON a.idcategory = b.idcategory WHERE b.idproduct
-		
-			= :idproduct
-		
+		return  $sql->select("
+
+		SELECT * FROM tb_categories a INNER JOIN  tb_productscategories b ON a.idcategory = b.idcategory WHERE b.idproduct = :idproduct
 		
 		", [
 			":idproduct"=>$this->getidproduct()
