@@ -19,6 +19,8 @@ class Cart extends Model
             if (isset($_SESSION[Cart::SESSION]) && (int)$_SESSION[Cart::SESSION]['idcart'] > 0)
             {
                 $cart->get((int)$_SESSION[Cart::SESSION]['idcart']);
+                var_dump($cart->get((int)$_SESSION[Cart::SESSION]['idcart']));
+                exit;
             }
             else
             {
@@ -98,8 +100,8 @@ class Cart extends Model
                 ":vlfreight"=>$this->getvlfreight(),
                 ":nrdays"=>$this->getnrdays()
             ]);
-            // var_dump($results);
-            // exit;
+            var_dump($results);
+            exit;
 
             $this->setData($results[0]);
         }
