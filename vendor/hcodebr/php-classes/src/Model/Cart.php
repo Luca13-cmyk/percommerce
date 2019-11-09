@@ -99,10 +99,6 @@ class Cart extends Model
                 ":nrdays"=>$this->getnrdays()
             ]);
 
-            var_dump($results);
-            exit;
-            //csc
-
             $this->setData($results[0]);
         }
 
