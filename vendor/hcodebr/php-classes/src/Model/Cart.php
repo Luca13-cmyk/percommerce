@@ -8,103 +8,208 @@ use \Hcode\Mailer;
 use \Hcode\Model\User;
 
 class Cart extends Model 
-{
+{   
 
-        const SESSION = "Cart";
+    const SESSION = "Cart";
+	const SESSION_ERROR = "CartError";
 
-        public static function getFromSession()
-        {
-            $cart = new Cart();
+	public static function getFromSession()
+	{
 
-            if (isset($_SESSION[Cart::SESSION]) && (int)$_SESSION[Cart::SESSION]['idcart'] > 0)
-            {
-                $cart->get((int)$_SESSION[Cart::SESSION]['idcart']);
-                var_dump($cart->get((int)$_SESSION[Cart::SESSION]['idcart']));
-                exit;
-            }
-            else
-            {
-                $cart->getFromSessionID();
+		$cart = new Cart();
 
-                if (!(int)$cart->getidcart() > 0) 
-                {
-                    $data = [
-                        "dessessionid"=>session_id()
-                    ];
+		if (isset($_SESSION[Cart::SESSION]) && (int)$_SESSION[Cart::SESSION]['idcart'] > 0) {
 
-                    if (User::checkLogin(false))
-                    {
-                        $user = User::getFromSession();
+			$cart->get((int)$_SESSION[Cart::SESSION]['idcart']);
 
-                        $data['iduser'] = $user->getiduser();
+		} else {
 
-                    }
+			$cart->getFromSessionID();
 
-                    $cart->setData($data);
-                    $cart->save();
+			if (!(int)$cart->getidcart() > 0) {
 
-                    $cart->setToSession();
+				$data = [
+					'dessessionid'=>session_id()
+				];
+
+				if (User::checkLogin(false)) {
+
+					$user = User::getFromSession();
+					
+					$data['iduser'] = $user->getiduser();	
+
+				}
+
+				$cart->setData($data);
+
+				$cart->save();
+
+				$cart->setToSession();
+
+
+			}
+
+		}
+
+		return $cart;
+
+	}
+
+	public function setToSession()
+	{
+
+		$_SESSION[Cart::SESSION] = $this->getValues();
+
+	}
+
+	public function getFromSessionID()
+	{
+
+		$sql = new Sql();
+
+		$results = $sql->select("SELECT * FROM tb_carts WHERE dessessionid = :dessessionid", [
+			':dessessionid'=>session_id()
+		]);
+
+		if (count($results) > 0) {
+
+			$this->setData($results[0]);
+
+		}
+
+	}	
+
+	public function get(int $idcart)
+	{
+
+		$sql = new Sql();
+
+		$results = $sql->select("SELECT * FROM tb_carts WHERE idcart = :idcart", [
+			':idcart'=>$idcart
+		]);
+
+		if (count($results) > 0) {
+
+			$this->setData($results[0]);
+
+		}
+
+	}
+
+	public function save()
+	{
+
+		$sql = new Sql();
+
+		$results = $sql->select("CALL sp_carts_save(:idcart, :dessessionid, :iduser, :idaddress, :vlfreight, :nrdays)", [
+			':idcart'=>$this->getidcart(),
+			':dessessionid'=>$this->getdessessionid(),
+			':iduser'=>$this->getiduser(),
+			':idaddress'=>$this->getidaddress(),
+			':vlfreight'=>$this->getvlfreight(),
+			':nrdays'=>$this->getnrdays()
+		]);
+
+		$this->setData($results[0]);
+
+	}
+
+
+        // const SESSION = "Cart";
+
+        // public static function getFromSession()
+        // {
+        //     $cart = new Cart();
+
+        //     if (isset($_SESSION[Cart::SESSION]) && (int)$_SESSION[Cart::SESSION]['idcart'] > 0)
+        //     {
+        //         $cart->get((int)$_SESSION[Cart::SESSION]['idcart']);
+        //         var_dump($cart->get((int)$_SESSION[Cart::SESSION]['idcart']));
+        //         exit;
+        //     }
+        //     else
+        //     {
+        //         $cart->getFromSessionID();
+
+        //         if (!(int)$cart->getidcart() > 0) 
+        //         {
+        //             $data = [
+        //                 "dessessionid"=>session_id()
+        //             ];
+
+        //             if (User::checkLogin(false))
+        //             {
+        //                 $user = User::getFromSession();
+
+        //                 $data['iduser'] = $user->getiduser();
+
+        //             }
+
+        //             $cart->setData($data);
+        //             $cart->save();
+
+        //             $cart->setToSession();
 
                     
-                }
+        //         }
 
-            }
+        //     }
 
-            return $cart;
-        }
+        //     return $cart;
+        // }
 
-        public function setToSession()
-        {
-            $_SESSION[Cart::SESSION] = $this->getValues();
-        }
+        // public function setToSession()
+        // {
+        //     $_SESSION[Cart::SESSION] = $this->getValues();
+        // }
 
         
-        public function getFromSessionID()
-        {
-            $sql = new Sql();
-            $results = $sql->select("SELECT * FROM tb_carts WHERE dessessionid = :dessessionid", [
-                ":dessessionid"=>session_id()
-            ]);
+        // public function getFromSessionID()
+        // {
+        //     $sql = new Sql();
+        //     $results = $sql->select("SELECT * FROM tb_carts WHERE dessessionid = :dessessionid", [
+        //         ":dessessionid"=>session_id()
+        //     ]);
 
-            if (count($results) > 0)
-            {
-                $this->setData($results[0]);
+        //     if (count($results) > 0)
+        //     {
+        //         $this->setData($results[0]);
 
-            }
+        //     }
 
-        }
+        // }
 
-        public function get(int $idcart)
-        {
-            $sql = new Sql();
-            $results = $sql->select("SELECT * FROM tb_carts WHERE idcart = :idcart", [
-                ":idcart"=>$idcart
-            ]);
+        // public function get(int $idcart)
+        // {
+        //     $sql = new Sql();
+        //     $results = $sql->select("SELECT * FROM tb_carts WHERE idcart = :idcart", [
+        //         ":idcart"=>$idcart
+        //     ]);
 
-            if (count($results) > 0)
-            {
-                $this->setData($results[0]);
+        //     if (count($results) > 0)
+        //     {
+        //         $this->setData($results[0]);
 
-            }
+        //     }
 
-        }
+        // }
 
-        public function save()
-        {
-            $sql = new Sql();
-            $results = $sql->select("CALL sp_carts_save(:idcart, :dessessionid, :iduser, :idaddress, :vlfreight, :nrdays)", [
-                ":idcart"=>$this->getidcart(),
-                ":dessessionid"=>$this->getdessessionid(),
-                ":iduser"=>$this->getiduser(),
-                ":idaddress"=>$this->getidaddress(),
-                ":vlfreight"=>$this->getvlfreight(),
-                ":nrdays"=>$this->getnrdays()
-            ]);
-            var_dump($results);
-            exit;
+        // public function save()
+        // {
+        //     $sql = new Sql();
+        //     $results = $sql->select("CALL sp_carts_save(:idcart, :dessessionid, :iduser, :idaddress, :vlfreight, :nrdays)", [
+        //         ":idcart"=>$this->getidcart(),
+        //         ":dessessionid"=>$this->getdessessionid(),
+        //         ":iduser"=>$this->getiduser(),
+        //         ":idaddress"=>$this->getidaddress(),
+        //         ":vlfreight"=>$this->getvlfreight(),
+        //         ":nrdays"=>$this->getnrdays()
+        //     ]);
+        //     var_dump($results);
+        //     exit;
 
-            $this->setData($results[0]);
-        }
+        //     $this->setData($results[0]);
+        // }
 
 }
 
