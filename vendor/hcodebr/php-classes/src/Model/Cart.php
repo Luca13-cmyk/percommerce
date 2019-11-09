@@ -17,8 +17,8 @@ class Cart extends Model
 	{
 
 		$cart = new Cart();
-        echo $_SESSION[Cart::SESSION];
-        echo (int)$_SESSION[Cart::SESSION]['idcart'];
+        var_dump( $_SESSION[Cart::SESSION] );
+        var_dump( (int)$_SESSION[Cart::SESSION]['idcart'] );
         exit;
 		if (isset($_SESSION[Cart::SESSION]) && (int)$_SESSION[Cart::SESSION]['idcart'] > 0) {
 
