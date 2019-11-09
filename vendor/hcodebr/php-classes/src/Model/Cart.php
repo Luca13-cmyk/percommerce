@@ -98,8 +98,8 @@ class Cart extends Model
                 ":vlfreight"=>$this->getvlfreight(),
                 ":nrdays"=>$this->getnrdays()
             ]);
-            var_dump($results);
-            exit;
+            // var_dump($results);
+            // exit;
 
             $this->setData($results[0]);
         }
