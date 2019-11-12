@@ -77,7 +77,9 @@ class User extends Model {
 		if (password_verify($password, $data["despassword"]) === true)
 		{
 
-            $user = new User();
+			$user = new User();
+			
+			$data['desperson'] = utf8_encode($data['desperson']);
 
 			$user->setData($data);
 
