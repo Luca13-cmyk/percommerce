@@ -32,8 +32,9 @@ class User extends Model {
 
 	public static function checkLogin($inadmin = true)
 	{
+		
 		if (
-
+			
 			!isset($_SESSION[User::SESSION])
 			||
 			!$_SESSION[User::SESSION]
@@ -102,9 +103,14 @@ class User extends Model {
 		if (!isset($_COOKIE['LOGIN'])) 
 		{
 			User::logout();
-			exit;
+			if ($inadmin)
+			{
+				header("Location: /admin/login");
+			}
+			header("Location: /login");
 
 		}
+		
 		if (!User::checkLogin($inadmin)) {
 			if ($inadmin)
 			{
