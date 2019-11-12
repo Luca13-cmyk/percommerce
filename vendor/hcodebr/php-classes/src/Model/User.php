@@ -82,11 +82,11 @@ class User extends Model {
 			if (isset($_COOKIE['LOGIN']))
 			{
 				unset($_COOKIE['LOGIN']);
-				setcookie("LOGIN", "yes", time() + 60);
+				setcookie("LOGIN", "yes", time() + 3600);
 			} else 
 			{
 
-				setcookie("LOGIN", "yes", time() + 60);
+				setcookie("LOGIN", "yes", time() + 3600);
 			}
 
 
@@ -393,6 +393,19 @@ class User extends Model {
 
 	}
 
+	public static function checkLoginExist($login)
+	{
+
+		$sql = new Sql();
+
+		$results = $sql->select("SELECT * FROM tb_users WHERE deslogin = :deslogin", [
+			':deslogin'=>$login
+		]);
+
+		return (count($results) > 0);
+
+	}
+
 	public static function getPasswordHash($password)
 	{
 
@@ -401,6 +414,7 @@ class User extends Model {
 		]);
 
 	}
+
 }
 
 
