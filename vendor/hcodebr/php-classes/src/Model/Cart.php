@@ -282,7 +282,7 @@ class Cart extends Model
 
     public function updateFreight()
     {
-        if ($this->getidaddress != '')
+        if ($this->getidaddress() != '')
         {
             $this->setFreight($this->getidaddress());
         }
