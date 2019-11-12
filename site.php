@@ -178,13 +178,21 @@ $app->post("/login", function() {
         User::login($_POST["login"], $_POST["password"]);
    } catch (Exception $e) {
        User::setError($e->getMessage());
-        header("Location: /login");
-        exit;
+        // header("Location: /login");
+        // exit;
    }
 
     header("Location: /checkout");
     exit;
 
+
+});
+$app->get("/logout", function() {
+
+
+    User::logout();
+    header("Location: /login");
+    exit;
 
 });
 ?>
