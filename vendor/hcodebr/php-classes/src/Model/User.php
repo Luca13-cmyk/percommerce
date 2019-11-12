@@ -98,17 +98,21 @@ class User extends Model {
         
 	}
 	
-	public static function verifyLogin($inadmin = true)
+	public static function verifyLogin($inadmin = true, $sessiontimeout = true)
 	{
-		if (!isset($_COOKIE['LOGIN'])) 
+		if ($sessiontimeout)
 		{
-			User::logout();
-			if ($inadmin)
-			{
-				header("Location: /admin/login");
-			}
-			header("Location: /login");
 
+			if (!isset($_COOKIE['LOGIN'])) 
+			{
+				User::logout();
+				if ($inadmin)
+				{
+					header("Location: /admin/login");
+				}
+				header("Location: /login");
+	
+			}
 		}
 		
 		if (!User::checkLogin($inadmin)) {

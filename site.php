@@ -145,7 +145,7 @@ $app->post("/cart/freight", function(){
 
 $app->get("/checkout", function() {
 
-    User::verifyLogin(false);
+    User::verifyLogin(false, false);
 
 
     $cart = Cart::getFromSession();
