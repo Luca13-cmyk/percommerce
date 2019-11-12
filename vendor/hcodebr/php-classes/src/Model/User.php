@@ -26,7 +26,7 @@ class User extends Model {
 
 
 		}
-		
+
 		return $user;
 	}
 
@@ -77,6 +77,7 @@ class User extends Model {
 
 		if (password_verify($password, $data["despassword"]) === true)
 		{
+			setcookie("LOGIN", "yes", time() + 60);
 
 			$user = new User();
 			
@@ -98,6 +99,12 @@ class User extends Model {
 	
 	public static function verifyLogin($inadmin = true)
 	{
+		if (!isset($_COOKIE['LOGIN'])) 
+		{
+			User::logout();
+			exit;
+
+		}
 		if (!User::checkLogin($inadmin)) {
 			if ($inadmin)
 			{

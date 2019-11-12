@@ -25,9 +25,7 @@ use \Hcode\Model\User;
 	}
 	function dateRegister()
 	{
-		// $us = new User();
 
-		// $us->get((int))
 		$user = User::getFromSession();
 	
 		return $user->getdtregister();
