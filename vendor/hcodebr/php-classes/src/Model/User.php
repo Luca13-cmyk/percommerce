@@ -141,7 +141,13 @@ class User extends Model {
 	public static function logout()
 	{
 		$_SESSION[User::SESSION] = NULL;
-		unset($_COOKIE['LOGIN']);
+		if (isset($_COOKIE['LOGIN']))
+			{
+				unset($_COOKIE['LOGIN']);
+				
+			} 
+		
+
 	}
 
 	public static function listAll()
