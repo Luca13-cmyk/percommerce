@@ -78,7 +78,17 @@ class User extends Model {
 
 		if (password_verify($password, $data["despassword"]) === true)
 		{
-			setcookie("LOGIN", "yes", time() + 60);
+			
+			if (isset($_COOKIE['LOGIN']))
+			{
+				unset($_COOKIE['LOGIN']);
+				setcookie("LOGIN", "yes", time() + 60);
+			} else 
+			{
+
+				setcookie("LOGIN", "yes", time() + 60);
+			}
+
 
 			$user = new User();
 			
