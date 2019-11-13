@@ -59,7 +59,25 @@ $app->post('/admin/users/create', function() {
 
 	$_POST["inadmin"] = (isset($_POST["inadmin"])) ? 1 : 0;
 
- 	// $_POST['despassword'] = User::getPasswordHash($_POST['despassword']);
+	 // $_POST['despassword'] = User::getPasswordHash($_POST['despassword']);
+	 
+	 if (User::checkLoginExist($_POST["deslogin"]) === true)
+	 {
+		//  User::setErrorRegister("Este endereco de email ja esta sendo usado por outro usuario.");
+		//  header("Location: /login");
+		throw new Exception("Login existe");
+		
+		 exit;
+	 }
+	 if (User::checkEmailExist($_POST["desemail"]) === true)
+    {
+        // User::setErrorRegister("Este endereco de email ja esta sendo usado por outro usuario.");
+		// header("Location: /login");
+		throw new Exception("Email existe");
+		
+        exit;
+    }
+
 	
 	$user->setData($_POST);
 

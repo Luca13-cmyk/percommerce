@@ -412,6 +412,18 @@ class User extends Model {
 		return (count($results) > 0);
 
 	}
+	public static function checkEmailExist($email)
+	{
+
+		$sql = new Sql();
+
+		$results = $sql->select("SELECT * FROM tb_persons WHERE desemail = :desemail", [
+			':desemail'=>$email
+		]);
+
+		return (count($results) > 0);
+
+	}
 
 	public static function getPasswordHash($password)
 	{
