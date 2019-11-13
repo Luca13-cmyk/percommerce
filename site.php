@@ -265,7 +265,7 @@ $app->get('/forgot', function() {
 $app->post("/forgot", function()
 {
 	
-	$user = User::getForgot($_POST["email"]);
+	$user = User::getForgot($_POST["email"], false);
 	header("Location: /forgot/sent");
 	exit;
 });
