@@ -141,13 +141,6 @@ class User extends Model {
 	public static function logout()
 	{
 		$_SESSION[User::SESSION] = NULL;
-		if (isset($_COOKIE['LOGIN']))
-			{
-				unset($_COOKIE['LOGIN']);
-				
-			} 
-		
-
 	}
 
 	public static function listAll()
@@ -215,7 +208,7 @@ class User extends Model {
 		));
 	}
 
-	public static function getForgot($email)
+	public static function getForgot($email, $inadmin = true)
 	{
 		$sql = new Sql();
 
@@ -256,9 +249,16 @@ class User extends Model {
 
 				$code = base64_encode($code);
 
-				$link = "https://lonelydes-com.umbler.net/admin/forgot/reset?code=$code";
+				if ($inadmin === true)
+				{
+					$link = "https://lonelydes-com.umbler.net/admin/forgot/reset?code=$code";
 
-				
+				} else 
+				{
+					$link = "https://lonelydes-com.umbler.net/forgot/reset?code=$code";
+
+				}
+
 				$mailer = new Mailer($data["desemail"], $data["desperson"],  "Redefinir senha da Hcode Store", "forgot", array(
 					"name"=>$data["desperson"],
 					"link"=>$link
