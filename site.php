@@ -380,7 +380,7 @@ $app->post("/profile", function(){
 
     $user->update();
 
-    $user = new User();
+    // $user = new User();
 
     $_SESSION[User::SESSION] = $user->getValues();
 
