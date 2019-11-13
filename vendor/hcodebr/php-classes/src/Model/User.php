@@ -108,6 +108,7 @@ class User extends Model {
         
 	}
 	
+	
 	public static function verifyLogin($inadmin = true, $sessiontimeout = true)
 	{
 		if ($sessiontimeout)

@@ -322,6 +322,9 @@ $app->get("/profile", function(){
     User::verifyLogin(false);
 
 
+
+    $_SESSION[User::SESSION] = $user->getValues();
+
     $user = User::getFromSession();
 
 
@@ -375,6 +378,7 @@ $app->post("/profile", function(){
     $_POST["deslogin"] = $_POST['desemail'];
 
     $user->setData($_POST);
+
 
     $user->update();
 
