@@ -321,9 +321,7 @@ $app->get("/profile", function(){
 
     User::verifyLogin(false);
 
-
-
-    $_SESSION[User::SESSION] = $user->getValues();
+    
 
     $user = User::getFromSession();
 
@@ -381,6 +379,10 @@ $app->post("/profile", function(){
 
 
     $user->update();
+
+    $user = new User();
+
+    $_SESSION[User::SESSION] = $user->getValues();
 
     User::setSuccess("Dados alterados com sucesso!");
 
