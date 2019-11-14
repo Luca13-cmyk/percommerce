@@ -16,10 +16,11 @@ class Cart extends Model
 	public static function getFromSession()
 	{
 
+
 		$cart = new Cart();
-        // var_dump( $_SESSION[Cart::SESSION] );
-        // var_dump( (int)$_SESSION[Cart::SESSION]['idcart'] );
-        // exit;
+        var_dump( $_SESSION[Cart::SESSION] );
+        var_dump( (int)$_SESSION[Cart::SESSION]['idcart'] );
+        exit;
         if (isset($_SESSION[Cart::SESSION]) && (int)$_SESSION[Cart::SESSION]['idcart'] > 0) 
         {
 
