@@ -413,4 +413,23 @@ $app->post("/profile", function(){
 
 
 
+
+
+$app->get("/data", function(){
+
+   $data = [
+       "numero"=>17
+   ];
+
+   $data = json_encode($data);
+   echo $data;
+
+
+
+});
+
+
+
+
+
 ?>
