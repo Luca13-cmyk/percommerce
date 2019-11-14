@@ -93,5 +93,34 @@
     <!-- Slider -->
     <script type="text/javascript" src="/res/site/js/bxslider.min.js"></script>
     <script type="text/javascript" src="/res/site/js/script.slider.js"></script>
+
+    <script>
+    
+    function att(value)
+{
+
+    var xhr = new XMLHttpRequest();
+
+
+    xhr.onload = function()
+  
+   
+      {
+      responseObject = JSON.parse(xhr.responseText);
+      console.table(responseObject);
+
+      }
+
+
+  
+
+
+    xhr.open("GET", "https://lonelydes-com.umbler.net/data", true);
+    xhr.send(null);
+
+  
+}
+    
+    </script>
   </body>
 </html>
