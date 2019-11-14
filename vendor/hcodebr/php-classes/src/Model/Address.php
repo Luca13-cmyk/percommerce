@@ -29,6 +29,25 @@ class Address extends Model
        }
 
 
+       public function loadFromCEP($nrcep)
+       {
+
+        $data = Address::getCEP($nrcep);
+        if (isset($data['logradouro']) && $data["logradouro"])
+        {
+            $this->setdesaddress($data["logradouro"]);
+            $this->setdescomplement($data["complemento"]);
+            $this->setdescity($data["localidade"]);
+            $this->setdesstate($data["uf"]);
+            $this->setdescountry("Brasil");
+            $this->setnrzipcode($nrcep);
+
+        }
+
+
+       }
+
+
 
 }
 

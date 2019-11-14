@@ -146,13 +146,21 @@ $app->post("/cart/freight", function(){
 $app->get("/checkout", function() {
 
     User::verifyLogin(false, false);
+    $cart = Cart::getFromSession();
+
 
     if (isset($_GET["zipcode"]))
     {
         $address->loadFromCEP($_GET["zipcode"]);
+        $cart->setidaddress($_GET["zipcode"]);
+
+        $cart->save();
+
+        $cart->getCalculateTotal();
     }
 
-    $cart = Cart::getFromSession();
+
+
 
 
     $address = new Address();
