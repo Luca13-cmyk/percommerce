@@ -104,8 +104,7 @@ $app->get("/cart/:idproduct/add", function($idproduct) {
 
     for ($i=0; $i < $qtd; $i++) { 
         
-        var_dump( $cart->addProduct($product) );
-        exit;
+         $cart->addProduct($product);
     }
 
 

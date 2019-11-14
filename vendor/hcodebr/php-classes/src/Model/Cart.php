@@ -107,7 +107,7 @@ class Cart extends Model
 	{
 
 		$sql = new Sql();
-
+        
 		$results = $sql->select("CALL sp_carts_save(:idcart, :dessessionid, :iduser, :deszipcode, :vlfreight, :nrdays)", [
 			':idcart'=>$this->getidcart(),
 			':dessessionid'=>$this->getdessessionid(),
@@ -115,7 +115,10 @@ class Cart extends Model
 			':deszipcode'=>$this->getdeszipcode(),
 			':vlfreight'=>$this->getvlfreight(),
 			':nrdays'=>$this->getnrdays()
-		]);
+        ]);
+        
+        echo json_encode($results[0]);
+        exit;
 
 		$this->setData($results[0]);
 
