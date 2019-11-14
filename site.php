@@ -88,11 +88,14 @@ $app->get("/cart/:idproduct/add", function($idproduct) {
 
     $product->get((int)$idproduct);
     $sql = new Sql();
-    $return = $sql->select("SELECT * FROM tb_products WHERE idproduct = 6");
-    echo json_encode($return);
-    exit;
+    // pegou
+    // $return = $sql->select("SELECT * FROM tb_products WHERE idproduct = 6");
+    // echo json_encode($return);
+    // exit;
+    //
 
-    echo json_encode($product->get((int)$idproduct));
+
+    // echo json_encode($product->get((int)$idproduct));
     echo json_encode( Cart::getFromSession());
     exit;
 
