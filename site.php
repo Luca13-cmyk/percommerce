@@ -151,8 +151,8 @@ $app->get("/checkout", function() {
 
     if (isset($_GET["zipcode"]))
     {
-        echo  json_encode($address->loadFromCEP($_GET["zipcode"]));
-        exit;
+        // echo  json_encode($address->loadFromCEP($_GET["zipcode"]));
+        // exit;
         $cart->setidaddress($_GET["zipcode"]);
 
         $cart->save();
@@ -162,6 +162,9 @@ $app->get("/checkout", function() {
 
 
 
+        echo  json_encode($address->getValues());
+        echo  json_encode($cart->getValues());
+        exit;
 
 
     
