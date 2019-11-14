@@ -86,6 +86,9 @@ $app->get("/cart/:idproduct/add", function($idproduct) {
     $product = new Product();
 
     $product->get((int)$idproduct);
+    echo json_encode($product->get((int)$idproduct));
+    echo json_encode( Cart::getFromSession());
+    exit;
 
     $cart = Cart::getFromSession();
 
