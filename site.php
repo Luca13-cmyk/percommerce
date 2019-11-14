@@ -71,7 +71,7 @@ $app->get("/cart", function() {
     $cart = Cart::getFromSession();
 
     $page = new Page();
-
+echo json_encode($cart->getValues());
     $page->setTpl("cart", [
         'cart'=>$cart->getValues(),
         'products'=>$cart->getProducts(),
