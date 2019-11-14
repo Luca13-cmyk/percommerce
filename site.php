@@ -165,7 +165,7 @@ $app->get("/checkout", function() {
     }
 
 
-
+    $address->loadFromCEP($cart->getidaddress());
         echo  json_encode($address->getValues());
         echo  json_encode($cart->getValues());
         exit;
