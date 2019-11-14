@@ -147,6 +147,10 @@ $app->get("/checkout", function() {
 
     User::verifyLogin(false, false);
 
+    if (isset($_GET["zipcode"]))
+    {
+        $address->loadFromCEP($_GET["zipcode"]);
+    }
 
     $cart = Cart::getFromSession();
 
@@ -162,6 +166,15 @@ $app->get("/checkout", function() {
     ]);
 
 });
+
+$app->post("/checkout", function() {
+
+
+
+});
+
+
+
 
 $app->get("/login", function() {
 
@@ -319,7 +332,7 @@ $app->post("/forgot/reset", function()
 
 $app->get("/profile", function(){
 
-    User::verifyLogin(false);
+    User::verifyLogin(false, false);
 
     
 
@@ -339,7 +352,7 @@ $app->get("/profile", function(){
 });
 $app->post("/profile", function(){
 
-    User::verifyLogin(false);
+    User::verifyLogin(false, false);
 
 
     if (!isset($_POST["desperson"]) || $_POST["desperson"] === '')
@@ -380,7 +393,6 @@ $app->post("/profile", function(){
 
     $user->update();
 
-    // $user = new User();
 
     $_SESSION[User::SESSION] = $user->getValues();
 
