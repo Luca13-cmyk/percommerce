@@ -6,6 +6,7 @@ use \Hcode\Model\Category;
 use \Hcode\Model\Cart;
 use \Hcode\Model\Address;
 use \Hcode\Model\User;
+use \Hcode\DB\Sql;
 
 
 
@@ -86,6 +87,11 @@ $app->get("/cart/:idproduct/add", function($idproduct) {
     $product = new Product();
 
     $product->get((int)$idproduct);
+    $sql = new Sql();
+    $return = $sql->select("SELECT * FROM tb_products WHERE idproduct = 6");
+    echo json_encode($return);
+    exit;
+
     echo json_encode($product->get((int)$idproduct));
     echo json_encode( Cart::getFromSession());
     exit;
