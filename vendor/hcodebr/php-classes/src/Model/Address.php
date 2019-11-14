@@ -38,6 +38,7 @@ class Address extends Model
         {
             $this->setdesaddress($data["logradouro"]);
             $this->setdescomplement($data["complemento"]);
+            $this->setdesdistrict($data['bairro']);
             $this->setdescity($data["localidade"]);
             $this->setdesstate($data["uf"]);
             $this->setdescountry("Brasil");
