@@ -147,7 +147,7 @@ $app->get("/checkout", function() {
 
     User::verifyLogin(false, false);
     $cart = Cart::getFromSession();
-   
+    $address = new Address();
 
     if (isset($_GET["zipcode"]))
     {
@@ -164,7 +164,7 @@ $app->get("/checkout", function() {
 
 
 
-    $address = new Address();
+    
 
     $page = new Page();
 
