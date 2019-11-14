@@ -152,6 +152,7 @@ $app->get("/checkout", function() {
     User::verifyLogin(false, false);
     $cart = Cart::getFromSession();
     $address = new Address();
+    
 
     if (isset($_GET["zipcode"]))
     {
@@ -164,11 +165,11 @@ $app->get("/checkout", function() {
         $cart->getCalculateTotal();
     }
 
-
     $address->loadFromCEP($cart->getidaddress());
-        echo  json_encode($address->getValues());
-        echo  json_encode($cart->getValues());
-        exit;
+    
+        // echo  json_encode($address->getValues());
+        // echo  json_encode($cart->getValues());
+        // exit;
 
 
     
