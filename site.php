@@ -151,7 +151,7 @@ $app->get("/checkout", function() {
 
     if (isset($_GET["zipcode"]))
     {
-        echo $address->loadFromCEP($_GET["zipcode"]);
+        echo  json_encode($address->loadFromCEP($_GET["zipcode"]));
         exit;
         $cart->setidaddress($_GET["zipcode"]);
 
