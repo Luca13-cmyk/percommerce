@@ -108,11 +108,11 @@ class Cart extends Model
 
 		$sql = new Sql();
 
-		$results = $sql->select("CALL sp_carts_save(:idcart, :dessessionid, :iduser, :idaddress, :vlfreight, :nrdays)", [
+		$results = $sql->select("CALL sp_carts_save(:idcart, :dessessionid, :iduser, :deszipcode, :vlfreight, :nrdays)", [
 			':idcart'=>$this->getidcart(),
 			':dessessionid'=>$this->getdessessionid(),
 			':iduser'=>$this->getiduser(),
-			':idaddress'=>$this->getidaddress(),
+			':deszipcode'=>$this->getdeszipcode(),
 			':vlfreight'=>$this->getvlfreight(),
 			':nrdays'=>$this->getnrdays()
 		]);
@@ -243,7 +243,7 @@ class Cart extends Model
             $this->setnrdays($result->PrazoEntrega);
 
             $this->setvlfreight(Cart::formatValueToDecimal($result->Valor));
-            $this->setidaddress($nrzipcode); 
+            $this->setzipcode($nrzipcode); 
 
             $this->save();
 
@@ -282,9 +282,9 @@ class Cart extends Model
 
     public function updateFreight()
     {
-        if ($this->getidaddress() != '')
+        if ($this->getzipcode() != '')
         {
-            $this->setFreight($this->getidaddress());
+            $this->setFreight($this->getzipcode());
         }
     }
 

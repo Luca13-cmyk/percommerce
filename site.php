@@ -154,16 +154,16 @@ $app->get("/checkout", function() {
     $address = new Address();
     if (!isset($_GET["zipcode"]))
     {
-        $_GET["zipcode"] = $cart->getidaddress();
+        $_GET["zipcode"] = $cart->getdeszipcode();
     }
 
     if (isset($_GET["zipcode"]))
     {
         // echo  json_encode($address->loadFromCEP($_GET["zipcode"]));
         // exit;
-        $address->loadFromCEP($cart->getidaddress());
+        $address->loadFromCEP($cart->getdeszipcode());
 
-        $cart->setidaddress($_GET["zipcode"]);
+        $cart->setdeszipcode($_GET["zipcode"]);
 
         $cart->save();
 
