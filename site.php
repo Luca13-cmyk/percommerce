@@ -135,9 +135,13 @@ $app->get("/cart/:idproduct/remove", function($idproduct) {
 $app->post("/cart/freight", function(){
 
     $cart = Cart::getFromSession();
+    // teste de frete
+    /*
 
     echo json_encode( $cart->setFreight($_POST["zipcode"]));
     exit;
+
+    */
     header("Location: /cart");
     exit;
 
