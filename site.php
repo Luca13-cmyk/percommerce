@@ -158,6 +158,8 @@ $app->get("/checkout", function() {
     {
         // echo  json_encode($address->loadFromCEP($_GET["zipcode"]));
         // exit;
+        $address->loadFromCEP($cart->getidaddress());
+        
         $cart->setidaddress($_GET["zipcode"]);
 
         $cart->save();
@@ -165,7 +167,7 @@ $app->get("/checkout", function() {
         $cart->getCalculateTotal();
     }
 
-    $address->loadFromCEP($cart->getidaddress());
+    
     
         // echo  json_encode($address->getValues());
         // echo  json_encode($cart->getValues());
@@ -178,7 +180,8 @@ $app->get("/checkout", function() {
 
     $page->setTpl("checkout", [
         "cart"=>$cart->getValues(),
-        "address"=>$address->getValues()
+        "address"=>$address->getValues(),
+        "products"=>$cart->getProducts()
         
     ]);
 
