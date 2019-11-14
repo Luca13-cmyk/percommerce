@@ -254,7 +254,7 @@ $app->post("/checkout", function() {
     $address->save();
 
     header("Location: /order");
-    
+    exit;
 
 
 });
