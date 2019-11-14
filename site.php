@@ -96,8 +96,7 @@ $app->get("/cart/:idproduct/add", function($idproduct) {
 
 
     // echo json_encode($product->get((int)$idproduct));
-    echo json_encode( Cart::getFromSession());
-    exit;
+    
 
     $cart = Cart::getFromSession();
 
@@ -105,7 +104,7 @@ $app->get("/cart/:idproduct/add", function($idproduct) {
 
     for ($i=0; $i < $qtd; $i++) { 
         
-        $cart->addProduct($product);
+        var_dump( $cart->addProduct($product) );
     }
 
 
