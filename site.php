@@ -147,13 +147,12 @@ $app->get("/checkout", function() {
 
     User::verifyLogin(false, false);
     $cart = Cart::getFromSession();
-    $data = Address::getCEP($nrcep);
-    var_dump($data);
-    exit;
+   
 
     if (isset($_GET["zipcode"]))
     {
-        $address->loadFromCEP($_GET["zipcode"]);
+        echo $address->loadFromCEP($_GET["zipcode"]);
+        exit;
         $cart->setidaddress($_GET["zipcode"]);
 
         $cart->save();

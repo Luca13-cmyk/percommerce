@@ -33,6 +33,7 @@ class Address extends Model
        {
 
         $data = Address::getCEP($nrcep);
+        return $data;
         if (isset($data['logradouro']) && $data["logradouro"])
         {
             $this->setdesaddress($data["logradouro"]);
