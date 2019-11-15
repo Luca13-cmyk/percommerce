@@ -265,7 +265,8 @@ $app->post("/checkout", function() {
 
     $_POST["deszipcode"] = $_POST["zipcode"];
     $_POST["idperson"] = $user->getidperson();
-
+echo json_encode($_POST);
+exit;
     $address->setData($_POST);
 
     $address->save();
