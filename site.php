@@ -89,7 +89,7 @@ $app->get("/cart/:idproduct/add", function($idproduct) {
     $product = new Product();
 
     $product->get((int)$idproduct);
-    $sql = new Sql();
+   
     // pegou
     // $return = $sql->select("SELECT * FROM tb_products WHERE idproduct = 6");
     // echo json_encode($return);
@@ -103,6 +103,9 @@ $app->get("/cart/:idproduct/add", function($idproduct) {
     $cart = Cart::getFromSession();
 
     $qtd = (isset($_GET['qtd'])) ? (int)$_GET['qtd'] : 1;
+
+    echo $cart->updateFreight();
+    exit;
 
     for ($i=0; $i < $qtd; $i++) { 
         

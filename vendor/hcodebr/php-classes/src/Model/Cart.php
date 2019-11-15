@@ -285,6 +285,8 @@ class Cart extends Model
 
     public function updateFreight()
     {
+        return $this->getzipcode();
+        exit;
         if ($this->getzipcode() != '')
         {
             $this->setFreight($this->getzipcode());
