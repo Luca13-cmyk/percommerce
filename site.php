@@ -104,8 +104,7 @@ $app->get("/cart/:idproduct/add", function($idproduct) {
 
     $qtd = (isset($_GET['qtd'])) ? (int)$_GET['qtd'] : 1;
 
-    echo $cart->updateFreight();
-    exit;
+    
 
     for ($i=0; $i < $qtd; $i++) { 
         
