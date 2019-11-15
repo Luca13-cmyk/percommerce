@@ -118,8 +118,7 @@ class Cart extends Model
 			':nrdays'=>$this->getnrdays()
         ]);
         
-        echo json_encode($results[0]);
-        exit;
+        
 
 		$this->setData($results[0]);
 
