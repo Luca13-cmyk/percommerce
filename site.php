@@ -154,8 +154,8 @@ $app->post("/cart/freight", function(){
 
     
     */
-    echo json_encode( $cart->setFreight($_POST["zipcode"]));
-    exit;
+    $cart->setFreight($_POST["zipcode"]);
+    
 
     header("Location: /cart");
     exit;
