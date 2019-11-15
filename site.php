@@ -73,6 +73,9 @@ $app->get("/cart", function() {
 
     $page = new Page();
 
+    echo json_encode($cart->getValues());
+    exit;
+
     $page->setTpl("cart", [
         'cart'=>$cart->getValues(),
         'products'=>$cart->getProducts(),
@@ -149,10 +152,11 @@ $app->post("/cart/freight", function(){
     // teste de frete
     /*
 
+    
+    */
     echo json_encode( $cart->setFreight($_POST["zipcode"]));
     exit;
 
-    */
     header("Location: /cart");
     exit;
 
