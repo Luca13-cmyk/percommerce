@@ -73,8 +73,8 @@ $app->get("/cart", function() {
 
     $page = new Page();
 
-    echo json_encode($cart->getValues());
-    exit;
+    // echo json_encode($cart->getValues());
+    // exit;
 
     $page->setTpl("cart", [
         'cart'=>$cart->getValues(),
