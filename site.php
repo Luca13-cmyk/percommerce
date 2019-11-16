@@ -270,7 +270,25 @@ $app->post("/checkout", function() {
 
     $address->save();
 
-    header("Location: /order");
+    $totals = $cart->getCalculateTotal();
+    var_dump($totals);
+    exit;
+    $cart = Cart::getFromSession();
+
+    $order = new Order();
+
+
+    $order->setData([
+        "idcart"=>$cart->getidcart(),
+        "idaddress"=>$address->getidaddress(),
+        "iduser"=>$user->getiduser(),
+        "idstatus"=>OrderStatus::EM_ABERTO,
+        "vltotal"=>$totals
+
+
+    ]);
+
+    header("Location: /order/".$order->getidorder());
     exit;
 
 
@@ -510,6 +528,15 @@ $app->post("/profile", function(){
 });
 
 
+$app->get("/order/:idorder", function($idorder){
+
+    User::verifyLogin(false, false);
+    $page = new Page();
+    $page->setTpl("payment", [
+
+    ]);
+
+});
 
 
 
@@ -517,8 +544,7 @@ $app->post("/profile", function(){
 
 
 
-
-$app->get("/data", function(){
+$app->get("/data/", function(){
 
    $data = [
        "numero"=>17
