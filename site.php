@@ -270,10 +270,12 @@ $app->post("/checkout", function() {
 
     $address->save();
 
+    $cart = Cart::getFromSession();
+
     $totals = $cart->getCalculateTotal();
     var_dump($totals);
     exit;
-    $cart = Cart::getFromSession();
+    
 
     $order = new Order();
 
