@@ -273,7 +273,7 @@ $app->post("/checkout", function() {
     $cart = Cart::getFromSession();
 
     $totals = $cart->getCalculateTotal();
-    var_dump($totals);
+    var_dump($totals["vlprice"]);
     exit;
     
 
@@ -285,7 +285,7 @@ $app->post("/checkout", function() {
         "idaddress"=>$address->getidaddress(),
         "iduser"=>$user->getiduser(),
         "idstatus"=>OrderStatus::EM_ABERTO,
-        "vltotal"=>$totals
+        "vltotal"=>$totals["vlprice"] + $cart->getvlfreight()
 
 
     ]);
