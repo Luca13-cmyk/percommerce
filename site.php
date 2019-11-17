@@ -6,6 +6,8 @@ use \Hcode\Model\Category;
 use \Hcode\Model\Cart;
 use \Hcode\Model\Address;
 use \Hcode\Model\User;
+use \Hcode\Model\Order;
+use \Hcode\Model\OrderStatus;
 use \Hcode\DB\Sql;
 
 
@@ -273,9 +275,7 @@ $app->post("/checkout", function() {
     $cart = Cart::getFromSession();
 
     $totals = $cart->getCalculateTotal();
-    var_dump($totals["vlprice"]);
-    exit;
-    
+   
 
     $order = new Order();
 
@@ -533,14 +533,25 @@ $app->post("/profile", function(){
 $app->get("/order/:idorder", function($idorder){
 
     User::verifyLogin(false, false);
+
+    $order = new Order();
+
+    $order->get((int)$idorder);
+    var_dump($order);
+    exit;
     $page = new Page();
     $page->setTpl("payment", [
-
+        "order"=>$order->getValues()
     ]);
 
 });
 
 
+$app->get("/boleto/:idorder", function($idorder){
+
+    
+
+});
 
 
 
