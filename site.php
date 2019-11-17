@@ -540,8 +540,7 @@ $app->get("/order/:idorder", function($idorder){
     $order = new Order();
 
     $order->get((int)$idorder);
-    var_dump($order);
-    exit;
+    
     $page = new Page();
     $page->setTpl("payment", [
         "order"=>$order->getValues()
