@@ -629,7 +629,7 @@ $app->get("/profile/orders", function(){
     $user = User::getFromSession();
     $page = new Page();
 
-    $pega->setTpl("profile-orders", [
+    $page->setTpl("profile-orders", [
         "orders"=>$user->getOrders()
     ]);
 
