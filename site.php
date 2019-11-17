@@ -648,7 +648,8 @@ $app->get("/profile/orders/:idorder", function($idorder){
 
     $pega->setTpl("profile-orders-detail", [
         "order"=>$order->getValues(),
-        "cart"=>$cart->getValues()
+        "cart"=>$cart->getValues(),
+        "products"=>$cart->getProducts()
     ]);
 
 });
