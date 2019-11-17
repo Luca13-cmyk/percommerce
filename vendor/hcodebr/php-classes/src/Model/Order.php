@@ -2,7 +2,7 @@
 
 namespace Hcode\Model;
 
-use \Hcode\DB\sql;
+use \Hcode\DB\Sql;
 use \Hcode\Model;
 
 class Order extends Model
