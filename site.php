@@ -623,21 +623,37 @@ require_once($path . "layout_itau.php");
 });
 
 
+$app->get("/profile/orders", function(){
+    User::verifyLogin(false, false);
 
+    $user = User::getFromSession();
+    $page = new Page();
 
-
-$app->get("/data/", function(){
-
-   $data = [
-       "numero"=>17
-   ];
-
-   $data = json_encode($data);
-   echo $data;
-
-
+    $pega->setTpl("profile-orders", [
+        "orders"=>$user->getOrders()
+    ]);
 
 });
+$app->get("/profile/orders/:idorder", function($idorder){
+    User::verifyLogin(false, false);
+
+    $order = new Order();
+
+    $cart = new Cart();
+
+    $cart->get((int)$order->getidcart());
+    $cart->getCalculateTotal();
+    $page = new Page();
+    $order->get((int)$idorder);
+
+    $pega->setTpl("profile-orders-detail", [
+        "order"=>$order->getValues(),
+        "cart"=>$cart->getValues()
+    ]);
+
+});
+
+
 
 
 
