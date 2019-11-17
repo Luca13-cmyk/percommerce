@@ -646,7 +646,7 @@ $app->get("/profile/orders/:idorder", function($idorder){
     $page = new Page();
     $order->get((int)$idorder);
 
-    $pega->setTpl("profile-orders-detail", [
+    $page->setTpl("profile-orders-detail", [
         "order"=>$order->getValues(),
         "cart"=>$cart->getValues(),
         "products"=>$cart->getProducts()
