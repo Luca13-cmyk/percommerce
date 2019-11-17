@@ -637,6 +637,8 @@ $app->get("/profile/orders", function(){
 $app->get("/profile/orders/:idorder", function($idorder){
     User::verifyLogin(false, false);
 
+    $order = new Order();
+
     $order->get((int)$idorder);
 
 	$cart = new Cart();
