@@ -29,7 +29,7 @@ class Order extends Model
     public function get($idorder)
     {
         $sql = new Sql();
-        $sql->select("SELECT * 
+        $results = $sql->select("SELECT * 
         FROM tb_orders a 
         INNER JOIN tb_ordersstatus b 
         USING(idstatus) 
