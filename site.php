@@ -291,9 +291,7 @@ $app->post("/checkout", function() {
     ]);
 
     $order->save();
-    $te =  $order->getValues();
-    var_dump($te);
-    exit;
+    
 
     header("Location: /order/".$order->getidorder());
     exit;
