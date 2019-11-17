@@ -637,20 +637,22 @@ $app->get("/profile/orders", function(){
 $app->get("/profile/orders/:idorder", function($idorder){
     User::verifyLogin(false, false);
 
-    $order = new Order();
-
-    $cart = new Cart();
-
-    $cart->get((int)$order->getidcart());
-    $cart->getCalculateTotal();
-    $page = new Page();
     $order->get((int)$idorder);
 
-    $page->setTpl("profile-orders-detail", [
-        "order"=>$order->getValues(),
-        "cart"=>$cart->getValues(),
-        "products"=>$cart->getProducts()
-    ]);
+	$cart = new Cart();
+
+	$cart->get((int)$order->getidcart());
+
+	$cart->getCalculateTotal();
+
+	$page = new Page();
+
+	$page->setTpl("profile-orders-detail", [
+		'order'=>$order->getValues(),
+		'cart'=>$cart->getValues(),
+		'products'=>$cart->getProducts()
+	]);	
+
 
 });
 
