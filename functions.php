@@ -36,7 +36,7 @@ use \Hcode\Model\Cart;
 	{
 		$cart = Cart::getFromSession();
 
-		$totals = $cart->getProductsTotal();
+		$totals = $cart->getProductsTotals();
 
 		return $totals["nrqtd"];
 	}
@@ -44,7 +44,7 @@ use \Hcode\Model\Cart;
 	{
 		$cart = Cart::getFromSession();
 
-		$totals = $cart->getProductsTotal();
+		$totals = $cart->getProductsTotals();
 
 		return formatPrice($totals["vlprice"]);
 	}
