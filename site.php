@@ -671,7 +671,7 @@ $app->get("/profile/change-password", function(){
 
 
 });
-$app->post("/profile/change-password", function($idorder){
+$app->post("/profile/change-password", function(){
     
     User::verifyLogin(false, false);
     if (!isset($_POST["current_pass"]) || $_POST["current_pass"] === '')
