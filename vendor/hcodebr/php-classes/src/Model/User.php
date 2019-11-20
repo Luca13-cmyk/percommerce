@@ -484,7 +484,7 @@ class User extends Model {
 		}
 		if (!password_verify($current_password, $this->getdespassword()))
 		{
-			User::setError("Senha invalida");
+			User::setError("Senha digitada atual nao condiz com a atual do usuario");
 			header("Location: /profile/change-password");
 			exit;
 		}
