@@ -465,7 +465,7 @@ class User extends Model {
 		}
 		if (!isset($new_password) || $new_password === '')
 		{
-			User::setError("Digite a nvoa senha");
+			User::setError("Digite a nova senha");
 			header("Location: /profile/change-password");
 			exit;
 		}
