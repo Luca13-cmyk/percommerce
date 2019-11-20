@@ -8,14 +8,17 @@ use \Hcode\Model\Cart;
 
 class Order extends Model
 {
+    const SUCCESS = "Order-Sucess";
+    const ERROR = "Order-error";
+    
     public function save()
     {
         $sql = new Sql();
 
-        $results = $sql->select("CALL sp_orders_save(:idorder, :idcart, :iduser, :idstatus, :idaddress, :vltotal)", [
+        $results = $sql->select("CALL sp_orders_save(:idorder, :idcart, :idOrder, :idstatus, :idaddress, :vltotal)", [
             ":idorder"=>$this->getidorder(),
             ":idcart"=>$this->getidcart(),
-            ":iduser"=>$this->getiduser(),
+            ":idOrder"=>$this->getidOrder(),
             ":idstatus"=>$this->getidstatus(),
             ":idaddress"=>$this->getidaddress(),
             ":vltotal"=>$this->getvltotal()
@@ -35,7 +38,7 @@ class Order extends Model
         INNER JOIN tb_ordersstatus b 
         USING(idstatus) 
         INNER JOIN tb_carts c USING(idcart)
-        INNER JOIN tb_users d ON d.iduser = a.iduser 
+        INNER JOIN tb_Orders d ON d.idOrder = a.idOrder 
         INNER JOIN tb_addresses  e USING(idaddress)
         INNER JOIN tb_persons f ON f.idperson = d.idperson
         WHERE a.idorder = :idorder
@@ -58,7 +61,7 @@ class Order extends Model
         INNER JOIN tb_ordersstatus b 
         USING(idstatus) 
         INNER JOIN tb_carts c USING(idcart)
-        INNER JOIN tb_users d ON d.iduser = a.iduser 
+        INNER JOIN tb_Orders d ON d.idOrder = a.idOrder 
         INNER JOIN tb_addresses  e USING(idaddress)
         INNER JOIN tb_persons f ON f.idperson = d.idperson
         ORDER BY a.dtregister DESC
@@ -84,6 +87,57 @@ class Order extends Model
 
         return $cart;
     }
+
+	public static function setError($msg)
+	{
+
+		$_SESSION[Order::ERROR] = $msg;
+
+	}
+
+	public static function getError()
+	{
+
+		$msg = (isset($_SESSION[Order::ERROR]) && $_SESSION[Order::ERROR]) ? $_SESSION[Order::ERROR] : '';
+
+		Order::clearError();
+
+		return $msg;
+
+	}
+
+	public static function clearError()
+	{
+
+		$_SESSION[Order::ERROR] = NULL;
+
+	}
+
+	public static function setSuccess($msg)
+	{
+
+		$_SESSION[Order::SUCCESS] = $msg;
+
+	}
+
+	public static function getSuccess()
+	{
+
+		$msg = (isset($_SESSION[Order::SUCCESS]) && $_SESSION[Order::SUCCESS]) ? $_SESSION[Order::SUCCESS] : '';
+
+		Order::clearSuccess();
+
+		return $msg;
+
+	}
+
+	public static function clearSuccess()
+	{
+
+		$_SESSION[Order::SUCCESS] = NULL;
+
+	}
+
 }
 
 ?>
