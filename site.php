@@ -708,6 +708,12 @@ $app->post("/profile/change-password", function(){
         header("Location: /profile/change-password");
         exit;
     }
+    if ($user->getPasswordHash($_POST["new_pass"]) === $user->getdespassword())
+    {
+        User::setError("Mesma senha antiga");
+        header("Location: /profile/change-password");
+        exit;
+    }
 
     $user->setdespassword($_POST["new_pass"]);
     $user->update();
