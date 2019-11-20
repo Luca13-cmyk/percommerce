@@ -455,6 +455,40 @@ class User extends Model {
 		return $results;
 
 	}
+	public function validChangePassword($current_password, $new_password, $new_password_confirm)
+	{
+		if (!isset($current_password) || $current_password === '')
+		{
+			User::setError("Digite a senha atual");
+			header("Location: /profile/change-password");
+			exit;
+		}
+		if (!isset($new_password) || $new_password === '')
+		{
+			User::setError("Digite a nvoa senha");
+			header("Location: /profile/change-password");
+			exit;
+		}
+		if (!isset($new_password_confirm) || $new_password_confirm === '')
+		{
+			User::setError("Confirme a nova senha");
+			header("Location: /profile/change-password");
+			exit;
+		}
+
+		if ($current_password === $new_password)
+		{
+			User::setError("Sua nova senha deve ser diferente da atual.");
+			header("Location: /profile/change-password");
+			exit;
+		}
+		if (!password_verify($current_password, $this->getdespassword()))
+		{
+			User::setError("Senha invalida");
+			header("Location: /profile/change-password");
+			exit;
+		}
+	}
 
 }
 
