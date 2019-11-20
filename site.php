@@ -658,7 +658,7 @@ $app->get("/profile/orders/:idorder", function($idorder){
 
 });
 
-$app->get("/profile/change-password", function($idorder){
+$app->get("/profile/change-password", function(){
     User::verifyLogin(false, false);
 
 
