@@ -37,7 +37,9 @@ $app->get("/admin/categories", function()
 	// 	]);
 	// }
 
-	$values = querySearch(Category, "/admin/categories?");
+	$category = new Category();
+
+	$values = querySearch($category, "/admin/categories?");
 
 
 	$page = new PageAdmin();

@@ -23,10 +23,11 @@ use \Hcode\Model\Category;
 
 		if ($search != "")
 		{
-			$pagination =  $model::getPageSearch($search, $page);
+			$pagination =  $model->getPageSearch($search, $page);
+			
 		} else 
 		{
-			$pagination =  $model::getPage($page);
+			$pagination =  $model->getPage($page);
 		}
 
 		$pages = [];
