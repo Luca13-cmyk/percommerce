@@ -15,7 +15,7 @@ use \Hcode\Model\Category;
 		return date("d/m/Y", strtotime($date));
 	}
 
-	function querySearch($model, $domain)
+	function querySearch(Object $model, $domain)
 	{
 		$search = (isset($_GET["search"])) ? $_GET["search"] : "";
 
