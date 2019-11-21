@@ -45,7 +45,7 @@ $app->get("/admin/categories", function()
 	$page->setTpl("categories", array(
 		"categories"=>$values["pagination"],
 		"search"=>$values["search"],
-		"pages"=>$values["page"]
+		"pages"=>$values["pages"]
 	));
 
 });

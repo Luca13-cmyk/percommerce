@@ -42,9 +42,9 @@ use \Hcode\Model\Category;
 			]);
 		}
 		$values = [
+			"pagination"=>$pagination["data"],
 			"search"=>$search,
-			"page"=>$page,
-			"pagination"=>$pagination
+			"pages"=>$pages
 		];
 		return $values;
 
