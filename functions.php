@@ -15,11 +15,11 @@ use \Hcode\Model\Category;
 		return date("d/m/Y", strtotime($date));
 	}
 
-	function querySearch($nameSearch, $page, $domain)
+	function querySearch($domain)
 	{
-		$search = (isset($nameSearch)) ? $nameSearch : "";
+		$search = (isset($_GET["search"])) ? $_GET["search"] : "";
 
-		$page = (isset($page)) ? (int)$page : 1;
+		$page = (isset($_GET["page"])) ? (int)$_GET["page"] : 1;
 
 		if ($search != "")
 		{
