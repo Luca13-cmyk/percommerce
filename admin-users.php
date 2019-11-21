@@ -7,38 +7,42 @@ use \Hcode\Model\User;
 $app->get('/admin/users', function() {
 	User::verifyLogin();
 
-	$search = (isset($_GET["search"])) ? $_GET["search"] : "";
+	// $search = (isset($_GET["search"])) ? $_GET["search"] : "";
 
-	$page = (isset($_GET["page"])) ? (int)$_GET["page"] : 1;
+	// $page = (isset($_GET["page"])) ? (int)$_GET["page"] : 1;
 
-	if ($search != "")
-	{
-		$pagination =  User::getPageSearch($search, $page);
-	} else 
-	{
-		$pagination =  User::getPage($page);
-	}
+	// if ($search != "")
+	// {
+	// 	$pagination =  User::getPageSearch($search, $page);
+	// } else 
+	// {
+	// 	$pagination =  User::getPage($page);
+	// }
 
 	
 
-	$pages = [];
+	// $pages = [];
 
-	for ($i=0; $i < $pagination["pages"]; $i++) 
-	{ 
-		array_push($pages, [
-			"href"=>"/admin/users?".http_build_query([
-				"page"=>$i+1,
-				"search"=>$search
-			]),
-			"text"=>$i+1
-		]);
-	}
+	// for ($i=0; $i < $pagination["pages"]; $i++) 
+	// { 
+	// 	array_push($pages, [
+	// 		"href"=>"/admin/users?".http_build_query([
+	// 			"page"=>$i+1,
+	// 			"search"=>$search
+	// 		]),
+	// 		"text"=>$i+1
+	// 	]);
+	// }
+
+	$user = new User();
+
+	$values = queryString($user, "/admin/users?");
 	
 	$page = new PageAdmin();
 	$page->setTpl("users", array(
-		"users"=>$pagination["data"],
-		"search"=>$search,
-		"pages"=>$pages
+		"users"=>$values["pagination"],
+		"search"=>$values["search"],
+		"pages"=>$values["pages"]
 	));
 	
 	
