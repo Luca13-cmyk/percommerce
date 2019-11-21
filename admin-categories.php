@@ -10,40 +10,42 @@ $app->get("/admin/categories", function()
 {
 	User::verifyLogin();
 
-	$search = (isset($_GET["search"])) ? $_GET["search"] : "";
+	// $search = (isset($_GET["search"])) ? $_GET["search"] : "";
 
-	$page = (isset($_GET["page"])) ? (int)$_GET["page"] : 1;
+	// $page = (isset($_GET["page"])) ? (int)$_GET["page"] : 1;
 
-	if ($search != "")
-	{
-		$pagination =  Category::getPageSearch($search, $page);
-	} else 
-	{
-		$pagination =  Category::getPage($page);
-	}
+	// if ($search != "")
+	// {
+	// 	$pagination =  Category::getPageSearch($search, $page);
+	// } else 
+	// {
+	// 	$pagination =  Category::getPage($page);
+	// }
 
 	
 
-	$pages = [];
+	// $pages = [];
 
-	for ($i=0; $i < $pagination["pages"]; $i++) 
-	{ 
-		array_push($pages, [
-			"href"=>"/admin/users?".http_build_query([
-				"page"=>$i+1,
-				"search"=>$search
-			]),
-			"text"=>$i+1
-		]);
-	}
+	// for ($i=0; $i < $pagination["pages"]; $i++) 
+	// { 
+	// 	array_push($pages, [
+	// 		"href"=>"/admin/categories?".http_build_query([
+	// 			"page"=>$i+1,
+	// 			"search"=>$search
+	// 		]),
+	// 		"text"=>$i+1
+	// 	]);
+	// }
+
+	$values = querySearch($_GET["search"], $_GET["page"], "/admin/categories?");
 
 
 	$page = new PageAdmin();
 
 	$page->setTpl("categories", array(
-		"categories"=>$pagination["data"],
-		"search"=>$search,
-		"pages"=>$pages
+		"categories"=>$values["pagination"],
+		"search"=>$values["search"],
+		"pages"=>$values["page"]
 	));
 
 });
