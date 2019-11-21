@@ -15,7 +15,7 @@ use \Hcode\Model\Category;
 		return date("d/m/Y", strtotime($date));
 	}
 
-	function querySearch($domain)
+	function querySearch($model, $domain)
 	{
 		$search = (isset($_GET["search"])) ? $_GET["search"] : "";
 
@@ -23,10 +23,10 @@ use \Hcode\Model\Category;
 
 		if ($search != "")
 		{
-			$pagination =  Category::getPageSearch($search, $page);
+			$pagination =  $model::getPageSearch($search, $page);
 		} else 
 		{
-			$pagination =  Category::getPage($page);
+			$pagination =  $model::getPage($page);
 		}
 
 		$pages = [];
