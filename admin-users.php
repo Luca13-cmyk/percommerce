@@ -36,7 +36,7 @@ $app->get('/admin/users', function() {
 
 	$user = new User();
 
-	$values = queryString($user, "/admin/users?");
+	$values = querySearch($user, "/admin/users?");
 	
 	$page = new PageAdmin();
 	$page->setTpl("users", array(
