@@ -8,11 +8,17 @@ $app->get('/admin/products', function() {
    
     User::verifyLogin();
 
-    $products = Product::listAll();
+    // $products = Product::listAll();
+
+    $products = new Product();
+
+    $values = querySearch($products, "/admin/products?");
    
     $page = new PageAdmin();
     $page->setTpl("products", [
-        'products'=>$products
+         "products"=>$values["pagination"],
+         "search"=>$values["search"],
+         "pages"=>$values["pages"]
     ]);
 
 

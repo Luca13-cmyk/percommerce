@@ -87,8 +87,14 @@ $app->get("/admin/orders", function(){
 
     $page = new PageAdmin();
 
+    $order = new Order();
+
+    $values = querySearch($order, "/admin/orders?");
+
     $page->setTpl("orders", [
-        "orders"=>Order::listAll()
+        "orders"=>$values["pagination"],
+        "search"=>$values["search"],
+		"pages"=>$values["pages"]
     ]);
 });
 
