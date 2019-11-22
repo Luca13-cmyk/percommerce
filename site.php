@@ -292,6 +292,8 @@ $app->post("/checkout", function() {
 
     $order->save();
     
+    var_dump($order->getValues());
+    exit;
 
     header("Location: /order/".$order->getidorder());
     exit;
