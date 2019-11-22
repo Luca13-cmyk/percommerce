@@ -1,92 +1,100 @@
 <?php
 
+
 namespace Hcode\Model;
 
 use \Hcode\DB\Sql;
 use \Hcode\Model;
 use \Hcode\Model\Cart;
 
-class Order extends Model
-{
-    const SUCCESS = "Order-Sucess";
-    const ERROR = "Order-error";
-    
-    public function save()
-    {
-        $sql = new Sql();
+class Order extends Model {
 
-        $results = $sql->select("CALL sp_orders_save(:idorder, :idcart, :idOrder, :idstatus, :idaddress, :vltotal)", [
-            ":idorder"=>$this->getidorder(),
-            ":idcart"=>$this->getidcart(),
-            ":idOrder"=>$this->getidOrder(),
-            ":idstatus"=>$this->getidstatus(),
-            ":idaddress"=>$this->getidaddress(),
-            ":vltotal"=>$this->getvltotal()
-            
-        ]);
+	const SUCCESS = "Order-Success";
+	const ERROR = "Order-Error";
 
-        if (count($results) > 0)
-        {
-            $this->setData($results[0]);
-        }
-    }
-    public function get($idorder)
-    {
-        $sql = new Sql();
-        $results = $sql->select("SELECT * 
-        FROM tb_orders a 
-        INNER JOIN tb_ordersstatus b 
-        USING(idstatus) 
-        INNER JOIN tb_carts c USING(idcart)
-        INNER JOIN tb_Orders d ON d.idOrder = a.idOrder 
-        INNER JOIN tb_addresses  e USING(idaddress)
-        INNER JOIN tb_persons f ON f.idperson = d.idperson
-        WHERE a.idorder = :idorder
-        ", [
-            ":idorder"=>$idorder
-        ]);
+	public function save()
+	{
 
-        if (count($results) > 0)
-        {
-            $this->setData($results[0]);
-        }
-    }
+		$sql = new Sql();
 
-    public static function listAll()
-    {
-        $sql = new Sql();
+		$results = $sql->select("CALL sp_orders_save(:idorder, :idcart, :iduser, :idstatus, :idaddress, :vltotal)", [
+			':idorder'=>$this->getidorder(),
+			':idcart'=>$this->getidcart(),
+			':iduser'=>$this->getiduser(),
+			':idstatus'=>$this->getidstatus(),
+			':idaddress'=>$this->getidaddress(),
+			':vltotal'=>$this->getvltotal()
+		]);
 
-        $results = $sql->select("SELECT * 
-        FROM tb_orders a 
-        INNER JOIN tb_ordersstatus b 
-        USING(idstatus) 
-        INNER JOIN tb_carts c USING(idcart)
-        INNER JOIN tb_Orders d ON d.idOrder = a.idOrder 
-        INNER JOIN tb_addresses  e USING(idaddress)
-        INNER JOIN tb_persons f ON f.idperson = d.idperson
-        ORDER BY a.dtregister DESC
-        ");
+		if (count($results) > 0) {
+			$this->setData($results[0]);
+		}
 
-        return $results;
-        
-    }
+	}
 
-    public function delete()
-    {
-        $sql = new Sql();
-        $sql->query("DELETE FROM tb_orders WHERE idorder = :idorder", [
-            ":idorder"=>$this->getidorder()
-        ]);
-    }
+	public function get($idorder)
+	{
 
-    public function getCart():Cart
-    {
-        $cart = new Cart();
+		$sql = new Sql();
 
-        $cart->get((int)$this->getidcart());
+		$results = $sql->select("
+			SELECT * 
+			FROM tb_orders a 
+			INNER JOIN tb_ordersstatus b USING(idstatus) 
+			INNER JOIN tb_carts c USING(idcart)
+			INNER JOIN tb_users d ON d.iduser = a.iduser
+			INNER JOIN tb_addresses e USING(idaddress)
+			INNER JOIN tb_persons f ON f.idperson = d.idperson
+			WHERE a.idorder = :idorder
+		", [
+			':idorder'=>$idorder
+		]);
 
-        return $cart;
-    }
+		if (count($results) > 0) {
+			$this->setData($results[0]);
+		}
+
+	}
+
+	public static function listAll()
+	{
+
+		$sql = new Sql();
+
+		return $sql->select("
+			SELECT * 
+			FROM tb_orders a 
+			INNER JOIN tb_ordersstatus b USING(idstatus) 
+			INNER JOIN tb_carts c USING(idcart)
+			INNER JOIN tb_users d ON d.iduser = a.iduser
+			INNER JOIN tb_addresses e USING(idaddress)
+			INNER JOIN tb_persons f ON f.idperson = d.idperson
+			ORDER BY a.dtregister DESC
+		");
+
+	}
+
+	public function delete()
+	{
+
+		$sql = new Sql();
+
+		$sql->query("DELETE FROM tb_orders WHERE idorder = :idorder", [
+			':idorder'=>$this->getidorder()
+		]);
+
+	}
+
+	public function getCart():Cart
+	{
+
+		$cart = new Cart();
+
+		$cart->get((int)$this->getidcart());
+
+		return $cart;
+
+	}
 
 	public static function setError($msg)
 	{
@@ -136,24 +144,24 @@ class Order extends Model
 
 		$_SESSION[Order::SUCCESS] = NULL;
 
-    }
-    public static function getPage($page = 1, $itemsPerPage = 10)
+	}
+
+	public static function getPage($page = 1, $itemsPerPage = 10)
 	{
-		
+
 		$start = ($page - 1) * $itemsPerPage;
 
 		$sql = new Sql();
+
 		$results = $sql->select("
-		
 			SELECT SQL_CALC_FOUND_ROWS *
 			FROM tb_orders a 
-            INNER JOIN tb_ordersstatus b 
-            USING(idstatus) 
-            INNER JOIN tb_carts c USING(idcart)
-            INNER JOIN tb_Orders d ON d.idOrder = a.idOrder 
-            INNER JOIN tb_addresses  e USING(idaddress)
-            INNER JOIN tb_persons f ON f.idperson = d.idperson
-            ORDER BY a.dtregister DESC
+			INNER JOIN tb_ordersstatus b USING(idstatus) 
+			INNER JOIN tb_carts c USING(idcart)
+			INNER JOIN tb_users d ON d.iduser = a.iduser
+			INNER JOIN tb_addresses e USING(idaddress)
+			INNER JOIN tb_persons f ON f.idperson = d.idperson
+			ORDER BY a.dtregister DESC
 			LIMIT $start, $itemsPerPage;
 		");
 
@@ -166,30 +174,29 @@ class Order extends Model
 		];
 
 	}
-	public static function getPageSearch($search, $page = 1, $itemsPerPage = 10) // LIKE = como ou mais ou menos igual
-																				 //  = exatamente igual ao especificado 
+
+	public static function getPageSearch($search, $page = 1, $itemsPerPage = 10)
 	{
-		
+
 		$start = ($page - 1) * $itemsPerPage;
 
 		$sql = new Sql();
+
 		$results = $sql->select("
-		
 			SELECT SQL_CALC_FOUND_ROWS *
 			FROM tb_orders a 
-            INNER JOIN tb_ordersstatus b 
-            USING(idstatus) 
-            INNER JOIN tb_carts c USING(idcart)
-            INNER JOIN tb_Orders d ON d.idOrder = a.idOrder 
-            INNER JOIN tb_addresses  e USING(idaddress)
-            INNER JOIN tb_persons f ON f.idperson = d.idperson
-            WHERE a.idorder = :id OR f.desperson LIKE :search
-            ORDER BY a.dtregister DESC
+			INNER JOIN tb_ordersstatus b USING(idstatus) 
+			INNER JOIN tb_carts c USING(idcart)
+			INNER JOIN tb_users d ON d.iduser = a.iduser
+			INNER JOIN tb_addresses e USING(idaddress)
+			INNER JOIN tb_persons f ON f.idperson = d.idperson
+			WHERE a.idorder = :id OR f.desperson LIKE :search
+			ORDER BY a.dtregister DESC
 			LIMIT $start, $itemsPerPage;
 		", [
-			":search"=>"%".$search."%", // buscar comecando ou terminando aquela palavra
-            ":id"=>$search    
-        ]); 
+			':search'=>'%'.$search.'%', // buscar comecando ou terminando aquela palavra
+			':id'=>$search
+		]);
 
 		$resultTotal = $sql->select("SELECT FOUND_ROWS() AS nrtotal;");
 
@@ -202,5 +209,7 @@ class Order extends Model
 	}
 
 }
+
+
 
 ?>
