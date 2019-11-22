@@ -20,7 +20,7 @@ $app->get('/admin/users/:iduser/password', function($iduser) {
 
 	$page->setTpl("users-password", array(
 		"user"=>$user->getValues(),
-		"msgErro"=>User::getError(),
+		"msgError"=>User::getError(),
 		"msgSuccess"=>User::getSuccess()
 	));
 	
